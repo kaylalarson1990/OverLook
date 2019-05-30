@@ -1,6 +1,60 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+$primary-background: #000000k;
+$primary-font: 'Roboto';
 
 body {
   background-color: $primary-background;
+  font-family: $primary-font;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+img {
+  height: 40px;
+  width: 40px;
+}
+
+h1 {
+  font-size: 46px;
+  margin: 20px;
+}
+
+p {
+  align-items: center;
+  display: flex;
+  font-weight: 300;
+}
+
+.contentSection {
+  width: 70%
+}
+
+.content {
+    border: 1px solid black;
+    height: 99.5%
+}
+
+.tabSection {
+  width: 30%;
+}
+.main,
+.customer,
+.bookings,
+.orders {
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid black;
+  height: auto;
+  padding: 15px
+}
+
+.bellboy,
+.search,
+.keycard,
+.bell {
+  margin: 10px;
 }
