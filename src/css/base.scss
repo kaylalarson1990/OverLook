@@ -1,5 +1,5 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: #000000k;
+$primary-background: #E0DCE4;
 $primary-font: 'Roboto';
 
 body {
@@ -28,12 +28,12 @@ p {
   font-weight: 300;
 }
 
-.contentSection {
+.mainContentSection {
   width: 70%
 }
 
-.content {
-    border: 1px solid black;
+.mainContent {
+    // border: 1px solid black;
     height: 99.5%
 }
 
@@ -44,12 +44,28 @@ p {
 .customer,
 .bookings,
 .orders {
+	cursor: pointer;
   flex-direction: row;
   display: flex;
   justify-content: flex-start;
-  border: 1px solid black;
   height: auto;
-  padding: 15px
+  padding: 15px;
+}
+
+.tabSection .main.current{
+  background: #ededed;
+  color: #222;
+}
+
+
+.content {
+  display: none;
+  background: #ededed;
+  padding: 15px;
+}
+
+.mainContentSection.current {
+  display: inherit;
 }
 
 .bellboy,
@@ -58,3 +74,4 @@ p {
 .bell {
   margin: 10px;
 }
+

@@ -3,7 +3,7 @@ const expect = chai.expect;
 import MainRepository from '../src/Main-Repo.js';
 import spies from 'chai-spies';
 chai.use(spies);
-import data from '../src/data.js'
+import data from '../src/data.js';
 
 describe('MainRepository', function() {
     let mainRepo;
@@ -18,10 +18,13 @@ describe('MainRepository', function() {
     it('should create a new instance', function() {
       expect(mainRepo).to.be.an.instanceOf(MainRepository);
     });
-    
-    it('should use test data', function() {
-        mainRepo.testData();
-        expect(mainRepo.testData()).to.equal(undefined)
+
+    it('should show today\'s date', function() {
+      expect(mainRepo.showTodaysDate('05/30/2019')).to.equal('05/30/2019');
+    });
+
+    it('should find available rooms', function() {
+      expect(mainRepo.showAvailableRooms).to.be.a('function')
     })
   
   });
