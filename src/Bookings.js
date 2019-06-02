@@ -1,9 +1,12 @@
 import data from './data.js';
+import Customer from './Customer.js'
+import MainRepository from './Main-Repo.js'
 
 class Bookings {
     constructor(combinedData) {
         this.data = combinedData || data;
         this.currentDate = this.showTodaysDate();
+        this.cust = new Customer();
     }
 
     showTodaysDate() {
@@ -22,6 +25,15 @@ class Bookings {
         let maxCount = Math.max(...Object.values(filterDates));
         return Object.keys(filterDates).filter(bookingDate => filterDates[bookingDate] === maxCount);
     }
+
+    bookedRooms() {
+        return this.data.bookingData.bookings.reduce((booked, current) => {
+          if (current.date === this.currentDate) {
+            booked.push(current.roomNumber);
+          }
+          return booked;
+        }, []);
+      }
 }
 
 export default Bookings;

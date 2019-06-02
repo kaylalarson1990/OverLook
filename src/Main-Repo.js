@@ -20,29 +20,29 @@ class MainRepository {
         return this.data.bookingData.bookings.filter(room => room.date !== this.currentDate).length
       }
     
-      calculateDebtsToday() {
-        let debt = this.data.roomServiceData.roomServices.reduce((room, service) => {
-          if (service.date === this.currentDate) {
-            room += service.totalCost;
+    calculateDebtsToday() {
+      let debt = this.data.roomServiceData.roomServices.reduce((room, service) => {
+        if (service.date === this.currentDate) {
+          room += service.totalCost;
+        }
+        return room;
+      }, 0);
+      let totalDebt = this.data.bookingData.bookings.reduce((totalBookings, currBooking) => {
+        if (currBooking.date === this.currentDate) {
+          totalBookings.push(currBooking.roomNumber);
+        }
+        return totalBookings;
+      }, []);
+      let charges = totalDebt.reduce((total, roomNum) => {
+        this.data.roomData.rooms.forEach(room => {
+          if (roomNum === room.number) {
+            total += room.costPerNight;
           }
-          return room;
-        }, 0);
-        let totalDebt = this.data.bookingData.bookings.reduce((totalBookings, currBooking) => {
-          if (currBooking.date === this.currentDate) {
-            totalBookings.push(currBooking.roomNumber);
-          }
-          return totalBookings;
-        }, []);
-        let charges = totalDebt.reduce((total, roomNum) => {
-          this.data.roomData.rooms.forEach(room => {
-            if (roomNum === room.number) {
-              total += room.costPerNight;
-            }
-          });
+        });
           return total;
-        }, 0);
+      }, 0);
         return debt + charges;
-      }
+    }
 
     showPercentageOfRoomsOccupiedToday() {
       let percentageOfBookings = this.data.bookingData.bookings.reduce((roomNums, booking) => {
@@ -60,6 +60,7 @@ class MainRepository {
         return emptyRooms;
       }, []).length / this.data.roomData.rooms.length * 100;
     }
+
 }
 
 export default MainRepository;

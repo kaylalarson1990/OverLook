@@ -1,10 +1,17 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 $primary-background: #E0DCE4;
 $primary-font: 'Roboto';
+$header-color: #011B1D;
+$background: #ededed;
+$backgroundBtn: #6EBA8F;
 
 body {
   background-color: $primary-background;
   font-family: $primary-font;
+}
+
+main {
+  margin: 0 10%;
 }
 
 header {
@@ -14,14 +21,21 @@ header {
 }
 
 h1 {
-  margin: 12px;
+  color: $header-color;
+  font-size: 42px;
+  margin: 0 10%;
+}
+
+h2 {
+  font-size: 30px;
+  margin: 10px;
 }
 
 .currentDate {
   font-family: $primary-font;
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 300;
-  margin-bottom: 20px;
+  margin: 20px 10px;
 }
 
 ul.tabs{
@@ -40,7 +54,7 @@ ul.tabs li{
 }
 
 ul.tabs li.current{
-  background: #ededed;
+  background: $background;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   color: #222;
@@ -51,11 +65,83 @@ ul.tabs li.current{
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   display: none;
-  background: #ededed;
-  height: 300px;
+  background: $background;
+  height: 500px;
   padding: 15px;
 }
 
 .tab-content.current{
   display: inherit;
 }
+
+#tab-3 {
+  padding: 20px;
+}
+
+.searchBookings, 
+.searchCustomersInput, 
+.name,
+.searchBtn, 
+.searchCustomers, 
+.addNewCustomer, 
+.orderSearch {
+  font-size: 16px;
+  border-radius: 3px;
+  margin: 10px;
+  padding: 15px;
+  width: 50%;
+}
+
+.searchBtn, 
+.searchCustomers, 
+.addNewCustomer, 
+.orderSearch {
+  background: $backgroundBtn;
+  color: $background;
+  width: 52.7%;
+}
+
+.searchRooms {
+  font-size: 20px;
+  font-weight: 300;
+  margin: 10px;
+}
+
+.showPercentageRooms, 
+.showAvailableRooms, 
+.totalOwed {
+  font-size: 20px;
+}
+
+select, 
+.showPercentageRooms, 
+.showAvailableRooms, 
+.totalOwed {
+  margin: 10px;
+}
+
+.popData {
+  margin: 30px 10px;
+}
+
+p,
+.customers {
+  margin: 10px;
+  font-size: 24px;
+  font-weight: 350;
+}
+
+.newCustName {
+  color: #FB6542;
+  cursor: pointer;
+  font-weight: 450;
+}
+
+.newCustName:hover {
+  background-color: pink;
+}
+
+.hidden {
+  display: none;
+}
+

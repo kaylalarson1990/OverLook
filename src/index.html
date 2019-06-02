@@ -24,15 +24,22 @@
         <div class="totalOwed"></div>
       </div>
       <div id="tab-2" class="tab-content">
-        <input class="searchCustomers" Placeholder="Search Customers">
+        <input class="searchCustomersInput" Placeholder="Search Customers">
         <button class="searchCustomers">Search</button>
-        <input class="name" Placeholder="Enter New Customer Name">
+        <input class="name hidden" Placeholder="Enter New Customer Name">
         <button class="addNewCustomer">Add Customer</button>
         <div class="customers"></div>
       </div>
       <div id="tab-3" class="tab-content">
           <input class="searchBookings" Placeholder="Search Bookings">
-          <button>Search</button>
+          <button class="searchBtn">Search</button>
+          <p class="searchRooms">Search Room Type: </p>
+          <select>
+              <option value="resSuite">Residential Suite</option>
+              <option value="single">Single</option>
+              <option value="juniorSuite">Junior Suite</option>
+              <option value="suite">Suite</option>
+            </select>
       </div>
       <div id="tab-4" class="tab-content">
         <input class="name" Placeholder="Search Orders">

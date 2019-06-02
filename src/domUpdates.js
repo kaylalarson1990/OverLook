@@ -30,12 +30,16 @@ let domUpdates = {
     }, 
 
     showMostPopularDate(date) {
-        $('#tab-3').append(`Most popular booking date(s): ${date} `);
+        $('#tab-3').append(`<p class=popData>Most popular booking date(s): ${date}</p>`);
+    },
+
+    showRoomsBookedForDate(date) {
+        $('#tab-3').append(`<p class=popData>Room numbers booked for today: ${date}</p>`)
     },
 
     findCustomers(customer) {
         $('.customers').html('');
-        let search = $('.searchCustomers').val();
+        let search = $('.searchCustomersInput').val();
         customer.returnSearchedCustomers(search).forEach(cust => {
           $('.customers').prepend(`
             <div class="newCust">
@@ -44,6 +48,8 @@ let domUpdates = {
           `);
         });
       },
+
+      
 
     
 }

@@ -23,6 +23,10 @@ class Customer {
         console.log(newCust)
         return newCust;
     }
+
+    // getCustomerSpecificData(name) {
+    //     if(name ===)
+    // }
 }
 
 export default Customer;

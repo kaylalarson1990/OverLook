@@ -46,7 +46,7 @@ $( document ).ready(function() {
       let bookings = new Bookings(combinedData);
       mainRepo.showTodaysDate();
       order.returnDailyTotalSpent('21/10/2019');
-      
+      domUpdates.showRoomsBookedForDate(bookings.bookedRooms());
       domUpdates.showCurrentDate(mainRepo.showTodaysDate());
       domUpdates.roomsOccupiedPercentage(mainRepo.showPercentageOfRoomsOccupiedToday());
       domUpdates.availableRooms(mainRepo.showAvailableRooms());
@@ -54,7 +54,6 @@ $( document ).ready(function() {
       domUpdates.showAllOrders(order.returnAllRoomServices());
       domUpdates.showMostPopularDate(bookings.mostPopularBookingDate());
       
-      order.returnDailyTotalSpent('21/10/2019');
       orderRepo.returnAllDailyRoomService('21/10/2019');
       $('ul.tabs li').click(function(){
           var tab_id = $(this).attr('data-tab');
@@ -65,15 +64,23 @@ $( document ).ready(function() {
       });
 
       $('.addNewCustomer').click(function() {
-        domUpdates.addNewCustomer(customer.createNewCustomer(`${name}`));
+        $('.name').removeClass('hidden')
+        domUpdates.addNewCustomer(customer.createNewCustomer(name));
       });
 
-    function searchCust() {
-        if ($('.searchCustomers').val() !== '') {
+    function searchCust(e) {
+        e.preventDefault();
+        if ($('.searchCustomersInput').val() !== '') {
         domUpdates.findCustomers(customer);
     }
   }
     $('.searchCustomers').on('click', searchCust);
+
+    $('.customers').on('click', function(e) {
+        e.preventDefault();
+        console.log('hello')
+
+    });
     
     }, 500);
   });
