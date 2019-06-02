@@ -7,46 +7,37 @@
   <body>
     <header class="headerNav">
       <h1>OverLook</h1>
+      <div class="newCustomer"></div>
     </header>
     <main>
-      <section class="tabSection">
-          <article class="main button current" data-tab="tab1">
-            <img class="bellboy" src="/images/bellboy.svg">
-            <p>Main</p>
-          </article>
-          <article class="customer button" data-tab="tab2">
-            <img class="search" src="/images/search.svg">
-            <p>Customer</p>
-          </article>
-          <article class="bookings button" data-tab="tab3">
-            <img class="keycard" src="/images/keycard.svg">
-            <p>Bookings</p>
-          </article>
-          <article class="orders button" data-tab="tab4">
-            <img class="bell" src="/images/bell.svg">
-            <p>Orders</p>
-          </article>
-      </section>
-      <section class="content mainContentSection current">
-        <article class="mainContent">
-          
-        </article>
-      </section>
-      <section class="content customerContentSection">
-        <article class="customerContent">
-          
-        </article>
-      </section>
-      <section class="content bookingsContentSection"></section>
-        <article class="bookingsContent">
-          
-        </article>
-      </section>
-      <section class="content ordersContentSection">
-        <article class="ordersContent">
-          
-        </article>
-      </section>
+      <ul class="tabs">
+        <li class="tab-link current" id="main" data-tab="tab-1">Main</li>
+        <li class="tab-link" id="customer" data-tab="tab-2">Customer</li>
+        <li class="tab-link" id="bookings" data-tab="tab-3">Bookings</li>
+        <li class="tab-link" id="orders" data-tab="tab-4">Orders</li>
+      </ul>
+      <div id="tab-1" class="tab-content current">
+        <h2>Welcome!</h2>
+        <div class="currentDate"></div>
+        <div class="showPercentageRooms"></div>
+        <div class="showAvailableRooms"></div>
+        <div class="totalOwed"></div>
+      </div>
+      <div id="tab-2" class="tab-content">
+        <input class="searchCustomers" Placeholder="Search Customers">
+        <button class="searchCustomers">Search</button>
+        <input class="name" Placeholder="Enter New Customer Name">
+        <button class="addNewCustomer">Add Customer</button>
+        <div class="customers"></div>
+      </div>
+      <div id="tab-3" class="tab-content">
+          <input class="searchBookings" Placeholder="Search Bookings">
+          <button>Search</button>
+      </div>
+      <div id="tab-4" class="tab-content">
+        <input class="name" Placeholder="Search Orders">
+        <button class="orderSearch">Search</button>
+      </div>
     </main>
 
     <!-- <footer class="footerNav">

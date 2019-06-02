@@ -1,4 +1,6 @@
-let data = [
+let data = 
+{
+   userData:
     {
     users: [
        {
@@ -44,7 +46,7 @@ let data = [
     ]
     },
     
-    {
+    roomData: {
        rooms: [
        {
        number: 1,
@@ -129,7 +131,8 @@ let data = [
      ]
     },
     
-    {
+
+    bookingData: {
        bookings: [
        {
        userID: 78,
@@ -183,6 +186,8 @@ let data = [
        }
     ]
     },
+    
+    roomServiceData : 
     {
        roomServices: [
        {
@@ -247,7 +252,7 @@ let data = [
        }
     ]
     }
-    ]
+   }
     
 
 export default data;

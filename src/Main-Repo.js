@@ -13,71 +13,52 @@ class MainRepository {
         let mm = String(today.getMonth() + 1).padStart(2, '0');
         let dd = String(today.getDate()).padStart(2, '0');
         let yyyy = today.getFullYear();
-        return today = mm + '/' + dd + '/' + yyyy;
-    }
-
-    searchForCustomers () {
-
+        return today = dd + '/' + mm + '/' + yyyy;
     }
 
     showAvailableRooms() {
-        let numOfRooms = this.data.bookingData.bookings.reduce((bookedRoomNum, currentBooking) => {
-          if (currentBooking.date !== this.today) {
-            if (!bookedRoomNum.includes(currentBooking.roomNumber)) {
-              bookedRoomNum.push(currentBooking.roomNumber);
-            }
-          }
-          return bookedRoomNum;
-        }, []);
-        return numOfRooms.reduce((allAvailableRooms, roomNum) => {
-          this.data.roomData.rooms.forEach(room => {
-            if (roomNum === room.number) {
-              allAvailableRooms.push(room);
-            }
-          });
-          return allAvailableRooms;
-        }, []);
+        return this.data.bookingData.bookings.filter(room => room.date !== this.currentDate).length
       }
     
       calculateDebtsToday() {
-        let roomServiceDebt = this.data.roomServiceData.roomServices.reduce((roomsThatOwe, service) => {
+        let debt = this.data.roomServiceData.roomServices.reduce((room, service) => {
           if (service.date === this.currentDate) {
-            roomsThatOwe += service.totalCost;
+            room += service.totalCost;
           }
-          return roomsThatOwe;
+          return room;
         }, 0);
-        let roomsWithDebt = this.data.bookingData.bookings.reduce((totalBookings, currBooking) => {
+        let totalDebt = this.data.bookingData.bookings.reduce((totalBookings, currBooking) => {
           if (currBooking.date === this.currentDate) {
             totalBookings.push(currBooking.roomNumber);
           }
           return totalBookings;
         }, []);
-        let roomCharges = roomsWithDebt.reduce((totalRoomCharges, roomNum) => {
+        let charges = totalDebt.reduce((total, roomNum) => {
           this.data.roomData.rooms.forEach(room => {
             if (roomNum === room.number) {
-              totalRoomCharges += room.costPerNight;
+              total += room.costPerNight;
             }
           });
-          return totalRoomCharges;
+          return total;
         }, 0);
-        return roomServiceDebt + roomCharges;
+        return debt + charges;
       }
-    
-      showRoomsOccupiedToday() {
-        let todaysBookings = this.data.bookingData.bookings.reduce((roomNums, booking) => {
-          if (booking.date === this.currentDate) {
-            roomNums.push(booking);
+
+    showPercentageOfRoomsOccupiedToday() {
+      let percentageOfBookings = this.data.bookingData.bookings.reduce((roomNums, booking) => {
+        if (booking.date === this.currentDate) {
+          roomNums.push(booking);
+        }
+        return roomNums;
+      }, []);
+      return percentageOfBookings.reduce((emptyRooms, booking) => {
+        this.data.roomData.rooms.forEach(room => {
+          if (booking.roomNumber === room.number) {
+            emptyRooms.push(room);
           }
-          return roomNums;
-        }, []);
-        return todaysBookings.reduce((freeRooms, booking) => {
-          this.data.roomData.rooms.forEach(room => {
-            if (booking.roomNumber === room.number) {
-              freeRooms.push(room);
-            }
-          });
-          return freeRooms;
-        }, []);
+        });
+        return emptyRooms;
+      }, []).length / this.data.roomData.rooms.length * 100;
     }
 }
 

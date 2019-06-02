@@ -7,71 +7,55 @@ body {
   font-family: $primary-font;
 }
 
-main {
+header {
   display: flex;
   flex-direction: row;
-}
-
-img {
-  height: 40px;
-  width: 40px;
+  padding: 10px;
 }
 
 h1 {
-  font-size: 46px;
-  margin: 20px;
+  margin: 12px;
 }
 
-p {
-  align-items: center;
-  display: flex;
+.currentDate {
+  font-family: $primary-font;
+  font-size: 20px;
   font-weight: 300;
+  margin-bottom: 20px;
 }
 
-.mainContentSection {
-  width: 70%
+ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  margin-top: 50px;
 }
 
-.mainContent {
-    // border: 1px solid black;
-    height: 99.5%
+ul.tabs li{
+  background: none;
+  color: #222;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
 }
 
-.tabSection {
-  width: 30%;
-}
-.main,
-.customer,
-.bookings,
-.orders {
-	cursor: pointer;
-  flex-direction: row;
-  display: flex;
-  justify-content: flex-start;
-  height: auto;
-  padding: 15px;
-}
-
-.tabSection .main.current{
+ul.tabs li.current{
   background: #ededed;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   color: #222;
 }
 
-
-.content {
+.tab-content{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
   display: none;
   background: #ededed;
+  height: 300px;
   padding: 15px;
 }
 
-.mainContentSection.current {
+.tab-content.current{
   display: inherit;
 }
-
-.bellboy,
-.search,
-.keycard,
-.bell {
-  margin: 10px;
-}
-

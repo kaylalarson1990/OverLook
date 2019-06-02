@@ -1,28 +1,20 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
 import MainRepository from './Main-Repo.js';
+import Order from './Order.js';
+import Bookings from './Bookings.js';
+import Customer from './Customer.js';
+import OrderRepository from './Order-Repo.js';
 import CustomerRepository from './Customer-Repo.js';
 import domUpdates from './domUpdates.js';
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import fetch from 'cross-fetch';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/bell.svg'
 import './images/bellboy.svg'
 import './images/keycard.svg'
 import './images/search.svg'
-import './Main-Repo.js'
-import './Order-Repo.js'
-import './Order.js'
-
-
-import Order from './Order.js';
-import OrderRepository from './Order-Repo.js';
+// import './Main-Repo.js'
+// import './Order-Repo.js'
+// import './Order.js'
 
 let userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users').then(function(response){
     return response.json()});
@@ -32,8 +24,7 @@ let userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/u
     return response.json()});
  let roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms').then(function(response){
     return response.json()});
-let combinedData = {'userData':{}, 'roomServiceData':{}, 'bookingData':{}, 'roomData':{}}
-// let request;
+let combinedData = {userData:{}, roomServiceData:{}, bookingData:{}, roomData:{}}
 
 Promise.all([userData, roomServiceData, bookingData, roomData])
     .then(function(values) {
@@ -45,48 +36,44 @@ Promise.all([userData, roomServiceData, bookingData, roomData])
     })
     .catch(error => console.log(`Error in promises ${error}`))
 
+$( document ).ready(function() {
+    setTimeout(function () {
+      let mainRepo = new MainRepository(combinedData);
+      let customerRepo = new CustomerRepository(combinedData);
+      let customer = new Customer(combinedData);
+      let order = new Order(combinedData);
+      let orderRepo = new OrderRepository(combinedData);
+      let bookings = new Bookings(combinedData);
+      mainRepo.showTodaysDate();
+      order.returnDailyTotalSpent('21/10/2019');
+      
+      domUpdates.showCurrentDate(mainRepo.showTodaysDate());
+      domUpdates.roomsOccupiedPercentage(mainRepo.showPercentageOfRoomsOccupiedToday());
+      domUpdates.availableRooms(mainRepo.showAvailableRooms());
+      domUpdates.totalOwedForTodaysDate(mainRepo.calculateDebtsToday());
+      domUpdates.showAllOrders(order.returnAllRoomServices());
+      domUpdates.showMostPopularDate(bookings.mostPopularBookingDate());
+      
+      order.returnDailyTotalSpent('21/10/2019');
+      orderRepo.returnAllDailyRoomService('21/10/2019');
+      $('ul.tabs li').click(function(){
+          var tab_id = $(this).attr('data-tab');
+          $('ul.tabs li').removeClass('current');
+          $('.tab-content').removeClass('current');
+          $(this).addClass('current');
+          $("#"+tab_id).addClass('current');
+      });
 
-    // if (window.XMLHttpRequest) {
-    //     request = new XMLHttpRequest();
-    //   } else if (window.ActiveXObject) {
-    //     try {
-    //       request = new ActiveXObject('Msxml2.XMLHTTP');
-    //     } 
-    //     catch (e) {
-    //       try {
-    //         request = new ActiveXObject('Microsoft.XMLHTTP');
-    //       } 
-    //       catch (e) {}
-    //     }
-    //   }
+      $('.addNewCustomer').click(function() {
+        domUpdates.addNewCustomer(customer.createNewCustomer(`${name}`));
+      });
 
-let mainRepo = new MainRepository(combinedData);
-let customerRepo = new CustomerRepository(combinedData);
-let order = new Order(combinedData);
-let orderRepo = new OrderRepository(combinedData);
-
-$(document).ready(() => {
-    domUpdates.showCurrentDate(mainRepo.showTodaysDate());
-    $('.button').click(function(){
-		var tab_id = $(this).attr('data-tab');
-
-		$('.button').removeClass('current');
-		$('.content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-	})
-});
-
+    function searchCust() {
+        if ($('.searchCustomers').val() !== '') {
+        domUpdates.findCustomers(customer);
+    }
+  }
+    $('.searchCustomers').on('click', searchCust);
     
-
-
-function timer() {
-    mainRepo.showTodaysDate();
-    mainRepo.showAvailableRooms();
-    customerRepo.searchForCustomer(); 
-    order.returnDailyTotalSpent('21/10/2019');
-    orderRepo.returnAllDailyRoomService('21/10/2019');
-}
-
-setTimeout(timer, 2000);
+    }, 500);
+  });

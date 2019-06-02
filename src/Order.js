@@ -1,17 +1,29 @@
 import data from './data.js';
 
 class Order {
-    constructor(data) {
-        this.data = data;
+    constructor(combinedData) {
+        this.data = combinedData || data;
+        this.currentDate = this.showTodaysDate();
     }
 
+    showTodaysDate() {
+      let today = new Date();
+      let mm = String(today.getMonth() + 1).padStart(2, '0');
+      let dd = String(today.getDate()).padStart(2, '0');
+      let yyyy = today.getFullYear();
+      return today = dd + '/' + mm + '/' + yyyy;
+  }
+
     returnAllRoomServices() {
-        return this.data.roomServiceData.roomServices;
+        return this.data.roomServiceData.roomServices.filter(room => {
+          if(this.currentDate === room.date) {
+            return room;
+          }
+        });
       }
     
-      returnDailyTotalSpent(givenDate) {
-        console.log(this.data.roomServiceData.roomServices)
-        const forThisDate = this.data.roomServiceData.roomServices.filter(day => day.date === givenDate);
+      returnDailyTotalSpent(date) {
+        const forThisDate = this.data.roomServiceData.roomServices.filter(day => day.date === date);
         return Math.round(100 * forThisDate.reduce((sum, order) => {
           sum += order.totalCost;
           return sum;

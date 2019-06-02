@@ -20,11 +20,31 @@ describe('MainRepository', function() {
     });
 
     it('should show today\'s date', function() {
-      expect(mainRepo.showTodaysDate('05/30/2019')).to.equal('05/30/2019');
+      expect(mainRepo.showTodaysDate('31/05/2019')).to.be.a('string');
     });
 
     it('should find available rooms', function() {
       expect(mainRepo.showAvailableRooms).to.be.a('function')
-    })
+    });
+
+    it('should find available rooms', function() {
+      expect(mainRepo.showAvailableRooms('31/05/2019')).to.equal(1);
+    });
+
+    it('should show total debts as a number', function() {
+      expect(mainRepo.calculateDebtsToday()).to.be.a('number');
+    });
+
+    it('should calculate total debts for today\'s date', function() {
+      expect(mainRepo.calculateDebtsToday('21/10/2019')).to.equal(0);
+    });
+
+    it('should show percentage of rooms available as a number', function() {
+      expect(mainRepo.showPercentageOfRoomsOccupiedToday()).to.be.a('number');
+    });
+
+    it('should calculate percentage of rooms available for today\'s date', function() {
+      expect(mainRepo.showPercentageOfRoomsOccupiedToday('21/10/2019')).to.equal(0);
+    });
   
   });
