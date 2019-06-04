@@ -23,7 +23,16 @@ class Bookings {
             return acc;
         }, {});
         let maxCount = Math.max(...Object.values(filterDates));
-        return Object.keys(filterDates).filter(bookingDate => filterDates[bookingDate] === maxCount);
+        return Object.keys(filterDates).filter(bookingDate => filterDates[bookingDate] === maxCount).shift();
+    }
+
+    leastPopularBookingDate() {
+      let filterDates = this.data.bookingData.bookings.reduce((acc, value) => {
+        acc[value.date] = (acc[value.date] || 1);
+        return acc;
+      }, {});
+      let maxCount = Math.min(...Object.values(filterDates));
+      return Object.keys(filterDates).filter(bookingDate => filterDates[bookingDate] === maxCount).shift();
     }
 
     bookedRooms() {

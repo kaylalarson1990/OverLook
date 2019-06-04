@@ -16,23 +16,34 @@ import './images/search.svg'
 // import './Order-Repo.js'
 // import './Order.js'
 
-let userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users').then(function(response){
-    return response.json()});
- let roomServiceData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices').then(function(response){
-    return response.json()});
- let bookingData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings').then(function(response){
-    return response.json()});
- let roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms').then(function(response){
-    return response.json()});
-let combinedData = {userData:{}, roomServiceData:{}, bookingData:{}, roomData:{}}
+const userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
+  .then(function(response){
+    return response.json()
+  });
+const roomServiceData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices')
+.then(function(response){
+  return response.json()
+});
+const bookingData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings')
+  .then(function(response){
+    return response.json()
+  });
+const roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms')
+  .then(function(response){
+    return response.json()
+  });
+const combinedData = {userData:[], roomServiceData:[], bookingData:[], roomData:[]};
 
+console.log(combinedData)
 Promise.all([userData, roomServiceData, bookingData, roomData])
     .then(function(values) {
-        combinedData['userData'] = values[0];
-        combinedData['roomServiceData'] = values[1];
-        combinedData['bookingData'] = values[2];
-        combinedData['roomData'] = values[3];
-        return combinedData;
+        combinedData.userData = values[0];
+        combinedData.roomServiceData = values[1];
+        combinedData.bookingData = values[2];
+        combinedData.roomData = values[3];
+        combinedData.userData.users.map(user => {
+          user.clicked = false;
+        })
     })
     .catch(error => console.log(`Error in promises ${error}`))
 
@@ -53,8 +64,9 @@ $( document ).ready(function() {
       domUpdates.totalOwedForTodaysDate(mainRepo.calculateDebtsToday());
       domUpdates.showAllOrders(order.returnAllRoomServices());
       domUpdates.showMostPopularDate(bookings.mostPopularBookingDate());
-      
+      domUpdates.showLeastPopularDate(bookings.leastPopularBookingDate());
       orderRepo.returnAllDailyRoomService('21/10/2019');
+
       $('ul.tabs li').click(function(){
           var tab_id = $(this).attr('data-tab');
           $('ul.tabs li').removeClass('current');
@@ -64,7 +76,6 @@ $( document ).ready(function() {
       });
 
       $('.addNewCustomer').click(function() {
-        $('.name').removeClass('hidden')
         domUpdates.addNewCustomer(customer.createNewCustomer(name));
       });
 
@@ -76,11 +87,30 @@ $( document ).ready(function() {
   }
     $('.searchCustomers').on('click', searchCust);
 
-    $('.customers').on('click', function(e) {
-        e.preventDefault();
-        console.log('hello')
+    $('.customers').on('click', function() {
+        let cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
+        const changeClick = combinedData.userData.users.map(user => {
+          if(user.id === cust[0].id) {
+            user.clicked = true;            
+          }
+          return user;
+        })
 
+        combinedData.userData.users = changeClick
+        displayCustOrders()
     });
     
     }, 500);
   });
+
+function displayCustOrders() {
+  console.log('hello1')
+  let customer = new Customer();
+  const checkClick = combinedData.userData.users.find(user => {
+    if(user.clicked) {
+      console.log('hello2')
+      domUpdates.customerOrders(customer.roomServiceAndOrderBreakdown(user))
+    }
+  })
+  return checkClick;
+}

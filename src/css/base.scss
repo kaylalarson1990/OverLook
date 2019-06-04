@@ -89,7 +89,7 @@ ul.tabs li.current{
   border-radius: 3px;
   margin: 10px;
   padding: 15px;
-  width: 50%;
+  width: 100%;
 }
 
 .searchBtn, 
@@ -98,12 +98,12 @@ ul.tabs li.current{
 .orderSearch {
   background: $backgroundBtn;
   color: $background;
-  width: 52.7%;
+  width: 110%;
 }
 
 .searchRooms {
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 400;
   margin: 10px;
 }
 
@@ -120,12 +120,18 @@ select,
   margin: 10px;
 }
 
+select {
+  height: 50px;
+  width: 180px;
+}
+
 .popData {
   margin: 30px 10px;
 }
 
 p,
-.customers {
+.customers,
+.newCustomers {
   margin: 10px;
   font-size: 24px;
   font-weight: 350;
@@ -141,7 +147,13 @@ p,
   background-color: pink;
 }
 
-.hidden {
-  display: none;
+h3 {
+  margin-left: 10px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
 }
 

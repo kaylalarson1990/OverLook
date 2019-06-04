@@ -26,31 +26,36 @@ let domUpdates = {
     },
 
     addNewCustomer() {
-        $('.customers').text($('.name').val());
+        $('.newCustomers').text($('.name').val());
     }, 
 
     showMostPopularDate(date) {
-        $('#tab-3').append(`<p class=popData>Most popular booking date(s): ${date}</p>`);
+        $('#tab-3').prepend(`<p class='popData'>Most popular booking date: ${date}</p>`);
+    },
+
+    showLeastPopularDate(date) {
+        $('#tab-3').prepend(`<p class='unpopData'>Least popular booking date: ${date}</p>`)
     },
 
     showRoomsBookedForDate(date) {
-        $('#tab-3').append(`<p class=popData>Room numbers booked for today: ${date}</p>`)
+        $('#tab-3').prepend(`<p class=popData>Room numbers booked for today: ${date}</p>`)
     },
 
     findCustomers(customer) {
         $('.customers').html('');
         let search = $('.searchCustomersInput').val();
         customer.returnSearchedCustomers(search).forEach(cust => {
-          $('.customers').prepend(`
-            <div class="newCust">
-              <p>Name: <span class="newCustName">${cust.name}</span></p>
-            </div>
-          `);
+          $('.customers').prepend(`<p>Name: <span class="newCustName">${cust.name}</span></p>`);
         });
       },
 
-      
-
+      customerOrders(customer) {
+          console.log(customer)
+          customer.forEach(property => {
+            $('.custOrder').append(`Name: ${property.food}`)
+          })
+          
+      }
     
 }
 

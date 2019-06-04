@@ -209,7 +209,7 @@ let data =
        totalCost: 13.07
        },
        {
-       userID: 22,
+       userID: 2,
        date: "01/01/2020",
        food: "Rustic Soft Sandwich",
        totalCost: 18.63

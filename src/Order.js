@@ -23,7 +23,7 @@ class Order {
       }
     
       returnDailyTotalSpent(date) {
-        const forThisDate = this.data.roomServiceData.roomServices.filter(day => day.date === date);
+      const forThisDate = this.data.roomServiceData.roomServices.filter(day => day.date === date);
         return Math.round(100 * forThisDate.reduce((sum, order) => {
           sum += order.totalCost;
           return sum;

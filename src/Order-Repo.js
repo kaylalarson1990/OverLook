@@ -8,8 +8,6 @@ class OrderRepository {
     returnAllDailyRoomService(givenDate) {
         return this.data.roomServiceData.roomServices.filter(day => day.date === givenDate);
     }
-    
-
 }
 
 export default OrderRepository;

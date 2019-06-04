@@ -24,26 +24,48 @@
         <div class="totalOwed"></div>
       </div>
       <div id="tab-2" class="tab-content">
-        <input class="searchCustomersInput" Placeholder="Search Customers">
-        <button class="searchCustomers">Search</button>
-        <input class="name hidden" Placeholder="Enter New Customer Name">
-        <button class="addNewCustomer">Add Customer</button>
-        <div class="customers"></div>
+        <div class="flex">
+        <article class="flexLeft">
+          <h3 class="searchRooms">Search Existing Customer: </h3>
+          <input class="searchCustomersInput" Placeholder="Search Customers">
+          <button class="searchCustomers">Search</button>
+          <div class="customers"></div>
+        </article>
+        <article class="flexRight">
+          <h3 class="searchRooms">Add New Customer: </h3>
+          <input class="name hidden" Placeholder="Enter New Name">
+          <button class="addNewCustomer">Add</button>
+          <div class="newCustomers"></div>
+        </article>
+        </div>
       </div>
       <div id="tab-3" class="tab-content">
-          <input class="searchBookings" Placeholder="Search Bookings">
-          <button class="searchBtn">Search</button>
-          <p class="searchRooms">Search Room Type: </p>
-          <select>
-              <option value="resSuite">Residential Suite</option>
-              <option value="single">Single</option>
-              <option value="juniorSuite">Junior Suite</option>
-              <option value="suite">Suite</option>
-            </select>
+          <div class="flex">
+            <article class="flexLeft">
+              <p class="searchRooms">Search Current Bookings: </p>
+              <input class="searchBookings" Placeholder="Search Bookings">
+              <button class="searchBtn">Search</button>
+            </article>
+            <article class="flexRight">
+              <p class="searchRooms">Search Room Type: </p>
+              <select>
+                <option value="resSuite">Residential Suite</option>
+                <option value="single">Single</option>
+                <option value="juniorSuite">Junior Suite</option>
+                <option value="suite">Suite</option>
+              </select>
+            </article>
+          </div>
       </div>
       <div id="tab-4" class="tab-content">
-        <input class="name" Placeholder="Search Orders">
-        <button class="orderSearch">Search</button>
+        <div class="flex">
+          <article class="flexLeft">
+            <p class="searchRooms">Search All Orders: </p>
+            <input class="name" Placeholder="Search Orders">
+            <button class="orderSearch">Search</button>
+            <div class="custOrder"></div>
+          </article>
+        </div>
       </div>
     </main>
 
