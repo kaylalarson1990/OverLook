@@ -11,16 +11,14 @@ import './images/bell.svg'
 import './images/bellboy.svg'
 import './images/keycard.svg'
 import './images/search.svg'
-// import './Main-Repo.js'
-// import './Order.js'
 
 const userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
   .then(function(response){
     return response.json()
   });
 const roomServiceData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices')
-.then(function(response){
-  return response.json()
+  .then(function(response){
+    return response.json()
 });
 const bookingData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings')
   .then(function(response){
@@ -34,13 +32,13 @@ const combinedData = {userData:[], roomServiceData:[], bookingData:[], roomData:
 
 Promise.all([userData, roomServiceData, bookingData, roomData])
     .then(function(values) {
-        combinedData.userData = values[0];
-        combinedData.roomServiceData = values[1];
-        combinedData.bookingData = values[2];
-        combinedData.roomData = values[3];
-        combinedData.userData.users.map(user => {
-          user.clicked = false;
-        })
+      combinedData.userData = values[0];
+      combinedData.roomServiceData = values[1];
+      combinedData.bookingData = values[2];
+      combinedData.roomData = values[3];
+      combinedData.userData.users.map(user => {
+        user.clicked = false;
+      })
     })
     .catch(error => console.log(`Error in promises ${error}`))
 
@@ -62,12 +60,12 @@ $( document ).ready(function() {
       domUpdates.showMostPopularDate(bookings.mostPopularBookingDate());
       domUpdates.showLeastPopularDate(bookings.leastPopularBookingDate());
 
-      $('ul.tabs li').click(function(){
-          var tab_id = $(this).attr('data-tab');
-          $('ul.tabs li').removeClass('current');
-          $('.tab-content').removeClass('current');
-          $(this).addClass('current');
-          $("#"+tab_id).addClass('current');
+      $('ul.tabs li').click(function() {
+        var tab_id = $(this).attr('data-tab');
+        $('ul.tabs li').removeClass('current');
+        $('.tab-content').removeClass('current');
+        $(this).addClass('current');
+        $("#" + tab_id).addClass('current');
       });
 
       $('.addNewCustomer').click(function() {
@@ -97,39 +95,37 @@ $( document ).ready(function() {
       });
 
     function searchCust(e) {
-        e.preventDefault();
-        const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
-        if (cust.length !== 0) {
+      e.preventDefault();
+      const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val());
+      if (cust.length !== 0) {
         domUpdates.findCustomers(customer);
-     } else {
-      domUpdates.searchCustError();
-    }
-    $('.newCustomers').html('');
+      } else {
+        domUpdates.searchCustError();
+      }
+      $('.newCustomers').html('');
   }
 
     $('.searchCustomers').on('click', searchCust);
 
     $('.customers').on('click', function() {
-        const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
-        const changeClick = combinedData.userData.users.map(user => {
-          if(user.id === cust[0].id) {
-            user.clicked = true;            
-          }
-          return user;
-        })
-        combinedData.userData.users = changeClick;
-        displayCustOrders();
+      const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
+      const changeClick = combinedData.userData.users.map(user => {
+        if (user.id === cust[0].id) {
+          user.clicked = true;            
+        }
+        return user;
+      })
+      combinedData.userData.users = changeClick;
+      displayCustOrders();
     });
-    
     }, 1000);
   });
 
 function displayCustOrders() {
   let customer = new Customer();
   const checkClick = combinedData.userData.users.find(user => {
-    if(user.clicked) {
+    if (user.clicked) {
       domUpdates.customerOrders(customer.roomServiceAndOrderBreakdown(user));
-      console.log('1', user)
       domUpdates.totalOrdersForDate(customer.totalCostOfRoomServiceByDate('21/10/2019', user));
       domUpdates.totalOrdersForAllTime(customer.totalAmountOfRoomServiceAllTime(user));
       domUpdates.showCustBookings(customer.sumOfPastAndCurrentBookings(user));
@@ -137,15 +133,6 @@ function displayCustOrders() {
   })
   return checkClick;
 }
-
-$('.submit__date__button').on('click', function() {
-  var date = new Date($('#date-input').val());
-  let day = date.getDate().toString().length  === 1 ? "0" + (date.getDate() + 1) : date.getDate() + 1
-  let month = date.getMonth().toString().length  === 1 ?  (date.getMonth() + 1) : date.getMonth() + 1
-  let year = date.getFullYear();
-  let formatDate = `${[day, month, year].join('/')}`
-  $('.orders--section').append(`Orders for ${formatDate}: ${displayTodaysOrders(formatDate)}`)
-});
 
 $('.orderSearch').on('click', searchOrdersByDate);
 
@@ -157,7 +144,7 @@ function searchOrdersByDate(e) {
   e.preventDefault();
   const order = new Order();
   const searchOrder = order.returnRoomServicesByDate($('.searchOrderInput').val());
-  if(searchOrder.length !== 0) {
+  if (searchOrder.length !== 0) {
     domUpdates.searchOrders(searchOrder);
   } else {
     domUpdates.searchOrderError();
