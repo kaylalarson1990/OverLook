@@ -3,7 +3,6 @@ import MainRepository from './Main-Repo.js';
 import Order from './Order.js';
 import Bookings from './Bookings.js';
 import Customer from './Customer.js';
-import CustomerRepository from './Customer-Repo.js';
 import domUpdates from './domUpdates.js';
 import './css/base.scss';
 import fetch from 'cross-fetch';
