@@ -22,7 +22,7 @@ class Order {
         });
       }
     
-      returnDailyTotalSpent(date) {
+    returnDailyTotalSpent(date) {
       const forThisDate = this.data.roomServiceData.roomServices.filter(day => day.date === date);
         return Math.round(100 * forThisDate.reduce((sum, order) => {
           sum += order.totalCost;
@@ -30,12 +30,18 @@ class Order {
         }, 0)) / 100;
       }
     
-      returnAllTimeTotalSpent() {
+    returnAllTimeTotalSpent() {
         return Math.round(100 * this.data.roomServiceData.roomServices.reduce((sum, order) => {
           sum += order.totalCost;
           return sum;
         }, 0)) / 100;
       }
+
+    returnRoomServicesByDate(givenDate) {
+      console.log()
+        return this.data.roomServiceData.roomServices.filter(day => day.date === givenDate);
+    }
+      
 }
 
 export default Order;

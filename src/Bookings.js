@@ -6,7 +6,6 @@ class Bookings {
     constructor(combinedData) {
         this.data = combinedData || data;
         this.currentDate = this.showTodaysDate();
-        this.cust = new Customer();
     }
 
     showTodaysDate() {
@@ -43,6 +42,25 @@ class Bookings {
           return booked;
         }, []);
       }
+
+    filterRooms(type) {
+      let rooms = this.data.roomData.rooms.filter(room => room.roomType === type);
+      console.log('rooms', rooms)
+      return rooms;
+    }
+      
+    filterRoomsByDate(date, type) {
+      return this.filterRooms(date).filter(room => room.roomType === type)
+    }
+    
+    addNewBooking(userID, date, roomNumber) {
+      const booking = {
+        userID: userID,
+        date: date,
+        roomNumber: roomNumber
+      }
+      this.data.bookingData.bookings.push(booking)
+    }
 }
 
 export default Bookings;

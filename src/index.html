@@ -2,6 +2,7 @@
 <html lang="en-US">
   <head>
     <title>OverLook Hotel Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap" rel="stylesheet">
   </head>
   <body>
@@ -41,29 +42,28 @@
       </div>
       <div id="tab-3" class="tab-content">
           <div class="flex">
-            <article class="flexLeft">
-              <p class="searchRooms">Search Current Bookings: </p>
-              <input class="searchBookings" Placeholder="Search Bookings">
-              <button class="searchBtn">Search</button>
-            </article>
             <article class="flexRight">
               <p class="searchRooms">Search Room Type: </p>
-              <select>
-                <option value="resSuite">Residential Suite</option>
-                <option value="single">Single</option>
-                <option value="juniorSuite">Junior Suite</option>
-                <option value="suite">Suite</option>
-              </select>
+                <button value="resSuite" class="resSuite filter">Residential Suite</button>
+                <button value="single" class="single filter">Single</button>
+                <button value="juniorSuite" class="juniorSuite filter">Junior Suite</button>
+                <button value="suite" class="suite filter">Suite</button>
             </article>
           </div>
+          <p class="custPopData"></p>
+          <p class="popData1"></p>
+          <p class="unPopData"></p>
+          <p class="popData2"></p>
+          <div class="filteredRoom"></div>
       </div>
       <div id="tab-4" class="tab-content">
         <div class="flex">
           <article class="flexLeft">
             <p class="searchRooms">Search All Orders: </p>
-            <input class="name" Placeholder="Search Orders">
+            <input class="searchOrderInput" Placeholder="Search Orders dd/mm/yyyy">
             <button class="orderSearch">Search</button>
             <div class="custOrder"></div>
+            <div class="custSearchOrder"></div>
           </article>
         </div>
       </div>

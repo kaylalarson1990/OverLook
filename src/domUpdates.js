@@ -9,7 +9,7 @@ let domUpdates = {
 
     showAllOrders(order) {
         order.forEach(a => {
-            $('#tab-4').append(` Food: ${a.food}, Price: ${a.totalCost}, Date: ${a.date} `);
+            $('#tab-4').append(` <p class="todaysOrders">Food: ${a.food}, Price: ${a.totalCost}, Date: ${a.date} </p>`);
         })
     },
 
@@ -30,15 +30,15 @@ let domUpdates = {
     }, 
 
     showMostPopularDate(date) {
-        $('#tab-3').prepend(`<p class='popData'>Most popular booking date: ${date}</p>`);
+        $('.popData1').prepend(`Most popular booking date: ${date}`);
     },
 
     showLeastPopularDate(date) {
-        $('#tab-3').prepend(`<p class='unpopData'>Least popular booking date: ${date}</p>`)
+        $('.unPopData').prepend(`Least popular booking date: ${date}`)
     },
 
     showRoomsBookedForDate(date) {
-        $('#tab-3').prepend(`<p class=popData>Room numbers booked for today: ${date}</p>`)
+        $('.popData2').prepend(`Room numbers booked for today: ${date}`)
     },
 
     findCustomers(customer) {
@@ -49,13 +49,72 @@ let domUpdates = {
         });
       },
 
-      customerOrders(customer) {
-          console.log(customer)
+      searchCustError() {
+        $('.custSearchOrder').html('');
+        $('.custSearchOrder').prepend(`<p>No orders match this date.</p>`);
+      },
+
+      searchOrderError() {
+        $('.customers').html('');
+        $('.customers').prepend(`<p>No results. Please add a new guest</p>`);
+      },
+
+    customerOrders(customer) {
           customer.forEach(property => {
-            $('.custOrder').append(`Name: ${property.food}`)
+            $('.custOrder').append(` <p class="custOrderInfo">Date ordered: ${property.date}, Total cost: ${property.totalCost}</p> `);
           })
-          
-      }
+      },
+
+      searchOrders(order) {
+          order.forEach(date => {
+            $('.custSearchOrder').append(` Food ordered: ${date.food}`)
+          }) 
+      },
+
+    totalOrdersForDate(cost) {
+      $('.custOrder').append(` <p class="custOrderInfo">Total for date: ${cost}</p> `);
+    },
+
+    totalOrdersForAllTime(cost) {
+      $('.custOrder').append(` <p class="custOrderInfo">Total spent for all time: ${cost}</p> `);
+    },
+
+    showCustBookings(booking) {
+        $('.popData1').html('');
+        $('.unPopData').html('');
+        $('.popData2').html('');
+      booking.forEach(user => {
+        $('.custPopData').append(` Booking Info: Date: ${user.date} & Room num: ${user.roomNumber} `);
+      })
+    },
+
+    filterByRoomType(suites) {
+        $('.filteredRoom').html('');
+        $('.popData1').html('');
+        $('.unPopData').html('');
+        $('.popData2').html('');
+        suites.forEach(room => {
+            $('.filteredRoom').append(`
+            <table>
+            <tr>
+            <th>Room Type</th>
+            <th>Bidet Avail</th>
+            <th>Bed Size</th>
+            <th>Num of Beds</th>
+            <th>Cost</th>
+            <th>Book Room</th>
+            </tr>
+            <tr>
+            <td>${room.roomType}</td>
+            <td>${room.bidet}</td>
+            <td>${room.bedSize}</td>
+            <td>${room.numBeds}</td>
+            <td>${room.costPerNight}</td>
+            <td><button class="bookRoom">Book Room</button>
+            </tr> `)
+        })
+    }
+
     
 }
 

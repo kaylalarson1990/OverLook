@@ -3,7 +3,6 @@ import MainRepository from './Main-Repo.js';
 import Order from './Order.js';
 import Bookings from './Bookings.js';
 import Customer from './Customer.js';
-import OrderRepository from './Order-Repo.js';
 import CustomerRepository from './Customer-Repo.js';
 import domUpdates from './domUpdates.js';
 import './css/base.scss';
@@ -13,7 +12,6 @@ import './images/bellboy.svg'
 import './images/keycard.svg'
 import './images/search.svg'
 // import './Main-Repo.js'
-// import './Order-Repo.js'
 // import './Order.js'
 
 const userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
@@ -34,7 +32,6 @@ const roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms
   });
 const combinedData = {userData:[], roomServiceData:[], bookingData:[], roomData:[]};
 
-console.log(combinedData)
 Promise.all([userData, roomServiceData, bookingData, roomData])
     .then(function(values) {
         combinedData.userData = values[0];
@@ -53,7 +50,6 @@ $( document ).ready(function() {
       let customerRepo = new CustomerRepository(combinedData);
       let customer = new Customer(combinedData);
       let order = new Order(combinedData);
-      let orderRepo = new OrderRepository(combinedData);
       let bookings = new Bookings(combinedData);
       mainRepo.showTodaysDate();
       order.returnDailyTotalSpent('21/10/2019');
@@ -65,7 +61,6 @@ $( document ).ready(function() {
       domUpdates.showAllOrders(order.returnAllRoomServices());
       domUpdates.showMostPopularDate(bookings.mostPopularBookingDate());
       domUpdates.showLeastPopularDate(bookings.leastPopularBookingDate());
-      orderRepo.returnAllDailyRoomService('21/10/2019');
 
       $('ul.tabs li').click(function(){
           var tab_id = $(this).attr('data-tab');
@@ -76,41 +71,90 @@ $( document ).ready(function() {
       });
 
       $('.addNewCustomer').click(function() {
-        domUpdates.addNewCustomer(customer.createNewCustomer(name));
+        domUpdates.addNewCustomer(customer.createNewCustomer($('.name').val()));
+        $('.name').val('');
+        $('.customers').html('');
+      });
+
+      $('.resSuite').click(function() {
+        domUpdates.filterByRoomType(bookings.filterRooms('residential suite'))
+      });
+
+      $('.single').click(function() {
+        domUpdates.filterByRoomType(bookings.filterRooms('single room'))
+      });
+
+      $('.juniorSuite').click(function() {
+        domUpdates.filterByRoomType(bookings.filterRooms('junior suite'))
+      });
+
+      $('.suite').click(function() {
+        domUpdates.filterByRoomType(bookings.filterRooms('suite'))
       });
 
     function searchCust(e) {
         e.preventDefault();
-        if ($('.searchCustomersInput').val() !== '') {
+        const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
+        if (cust.length !== 0) {
         domUpdates.findCustomers(customer);
+     } else {
+      domUpdates.searchCustError();
     }
+    // $('.searchCustomersInput').val('');
+    $('.newCustomers').html('');
   }
+
     $('.searchCustomers').on('click', searchCust);
 
     $('.customers').on('click', function() {
-        let cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
+        const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
         const changeClick = combinedData.userData.users.map(user => {
           if(user.id === cust[0].id) {
+            console.log('id', cust)
             user.clicked = true;            
           }
           return user;
         })
-
-        combinedData.userData.users = changeClick
-        displayCustOrders()
+        combinedData.userData.users = changeClick;
+        displayCustOrders();
     });
     
-    }, 500);
+    }, 1000);
   });
 
 function displayCustOrders() {
-  console.log('hello1')
   let customer = new Customer();
   const checkClick = combinedData.userData.users.find(user => {
     if(user.clicked) {
-      console.log('hello2')
-      domUpdates.customerOrders(customer.roomServiceAndOrderBreakdown(user))
+  console.log(combinedData.userData.users)
+      domUpdates.customerOrders(customer.roomServiceAndOrderBreakdown(user));
+      console.log('1', user)
+      domUpdates.totalOrdersForDate(customer.totalCostOfRoomServiceByDate('21/10/2019', user));
+      domUpdates.totalOrdersForAllTime(customer.totalAmountOfRoomServiceAllTime(user));
+      domUpdates.showCustBookings(customer.sumOfPastAndCurrentBookings(user));
     }
   })
   return checkClick;
+}
+
+$('.submit__date__button').on('click', function() {
+  var date = new Date($('#date-input').val());
+  let day = date.getDate().toString().length  === 1 ? "0" + (date.getDate() + 1) : date.getDate() + 1
+  let month = date.getMonth().toString().length  === 1 ?  (date.getMonth() + 1) : date.getMonth() + 1
+  let year = date.getFullYear();
+  let formatDate = `${[day, month, year].join('/')}`
+  $('.orders--section').append(`Orders for ${formatDate}: ${displayTodaysOrders(formatDate)}`)
+});
+
+$('.orderSearch').on('click', searchOrdersByDate);
+
+function searchOrdersByDate(e) {
+  e.preventDefault();
+  const order = new Order();
+  const searchOrder = order.returnRoomServicesByDate($('.searchOrderInput').val());
+  if(searchOrder.length !== 0) {
+    domUpdates.searchOrders(searchOrder);
+  } else {
+    domUpdates.searchCustError();
+  }
 }

@@ -4,6 +4,11 @@ $primary-font: 'Roboto';
 $header-color: #011B1D;
 $background: #ededed;
 $backgroundBtn: #6EBA8F;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   background-color: $primary-background;
@@ -66,8 +71,12 @@ ul.tabs li.current{
   border-bottom-left-radius: 5px;
   display: none;
   background: $background;
-  height: 500px;
+  min-height: 500px;
   padding: 15px;
+}
+
+#tab-1 {
+  text-align: center;
 }
 
 .tab-content.current{
@@ -84,7 +93,9 @@ ul.tabs li.current{
 .searchBtn, 
 .searchCustomers, 
 .addNewCustomer, 
-.orderSearch {
+.orderSearch,
+.addNewFood,
+.searchOrderInput {
   font-size: 16px;
   border-radius: 3px;
   margin: 10px;
@@ -95,10 +106,19 @@ ul.tabs li.current{
 .searchBtn, 
 .searchCustomers, 
 .addNewCustomer, 
-.orderSearch {
+.orderSearch,
+.addNewFood {
   background: $backgroundBtn;
   color: $background;
-  width: 110%;
+  width: 100%;
+}
+
+.filter {
+  background: $backgroundBtn;
+  border-radius: 3px;
+  color: $background;
+  margin: 10px;
+  padding: 10px;
 }
 
 .searchRooms {
@@ -116,7 +136,9 @@ ul.tabs li.current{
 select, 
 .showPercentageRooms, 
 .showAvailableRooms, 
-.totalOwed {
+.totalOwed,
+.custOrderInfo
+ {
   margin: 10px;
 }
 
@@ -125,13 +147,15 @@ select {
   width: 180px;
 }
 
-.popData {
-  margin: 30px 10px;
+.popData1 {
+  margin: 50px 10px;
 }
 
 p,
 .customers,
-.newCustomers {
+.newCustomers,
+.popData1,
+.todaysOrders {
   margin: 10px;
   font-size: 24px;
   font-weight: 350;
@@ -157,3 +181,45 @@ h3 {
   margin-top: 50px;
 }
 
+table, th, td {
+  border: 1px solid black;
+}
+
+.flexRight {
+  display: flex;
+  flex-direction: column;
+}
+
+.filteredRoom {
+  display: flex;
+  flex-direction: column;
+}
+
+
+// media queries//
+
+@media screen and (max-width: 900px) {
+  .flex {
+    flex-direction: column;
+  }
+
+
+  .searchCustomers, 
+  .addNewCustomer,
+  .orderSearch,
+  .addNewFood,
+  .name,
+  .searchCustomersInput,
+  .searchOrderInput {
+    width: 50%;
+  }
+
+  .resSuite,
+  .single,
+  .juniorSuite,
+  .suite {
+    width: 25%;
+    padding: 2%;
+  }
+
+}
