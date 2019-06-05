@@ -1,9 +1,12 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: #E0DCE4;
+$primary-background: #dce7ea;
+$secondary-color: #07575b;
+$body-color: #013138;
 $primary-font: 'Roboto';
-$header-color: #011B1D;
-$background: #ededed;
-$backgroundBtn: #6EBA8F;
+$header-color: #003b46;
+$background: #eff9fc;
+$backgroundBtn: #66a5ad;
+
 *,
 *::before,
 *::after {
@@ -12,6 +15,7 @@ $backgroundBtn: #6EBA8F;
 
 body {
   background-color: $primary-background;
+  color: $body-color;
   font-family: $primary-font;
 }
 
@@ -87,6 +91,12 @@ ul.tabs li.current{
   padding: 20px;
 }
 
+.showCustomer {
+  color: $secondary-color;
+  font: $primary-font;
+  font-size: 30px;
+}
+
 .searchBookings, 
 .searchCustomersInput, 
 .name,
@@ -155,20 +165,21 @@ p,
 .customers,
 .newCustomers,
 .popData1,
-.todaysOrders {
+.todaysOrders,
+.custSearchOrder {
   margin: 10px;
   font-size: 24px;
   font-weight: 350;
 }
 
 .newCustName {
-  color: #FB6542;
+  color: #56c6e2;
   cursor: pointer;
   font-weight: 450;
 }
 
 .newCustName:hover {
-  background-color: pink;
+  background-color: $primary-background;
 }
 
 h3 {
@@ -178,7 +189,7 @@ h3 {
 .flex {
   display: flex;
   justify-content: space-around;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 table, th, td {
@@ -203,6 +214,12 @@ table, th, td {
     flex-direction: column;
   }
 
+  .flexRight,
+  .flexLeft {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
 
   .searchCustomers, 
   .addNewCustomer,
@@ -212,14 +229,48 @@ table, th, td {
   .searchCustomersInput,
   .searchOrderInput {
     width: 50%;
+    font-size: 12px;
   }
 
   .resSuite,
   .single,
   .juniorSuite,
   .suite {
-    width: 25%;
-    padding: 2%;
+    width: 50%;
+    padding: 10px;
   }
 
+p,
+.customers,
+.newCustomers,
+.popData1,
+.todaysOrders,
+.custSearchOrder {
+  font-size: 18px;
+}
+
+}
+
+@media screen and (max-width: 500px) {
+  .searchCustomers, 
+  .addNewCustomer, 
+  .orderSearch, 
+  .addNewFood, 
+  .name, 
+  .searchCustomersInput, 
+  .searchOrderInput {
+    width: 60%;
+  }
+
+  .filteredRoom {
+    font-size: 12px;
+  }
+
+  ul.tabs {
+    display: flex;
+  }
+
+  ul.tabs li {
+    padding: 5px 10px;
+  }
 }

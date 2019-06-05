@@ -78,18 +78,22 @@ $( document ).ready(function() {
 
       $('.resSuite').click(function() {
         domUpdates.filterByRoomType(bookings.filterRooms('residential suite'))
+        $('.filteredRoom').toggle();
       });
 
       $('.single').click(function() {
         domUpdates.filterByRoomType(bookings.filterRooms('single room'))
+        $('.filteredRoom').toggle();
       });
 
       $('.juniorSuite').click(function() {
         domUpdates.filterByRoomType(bookings.filterRooms('junior suite'))
+        $('.filteredRoom').toggle();
       });
 
       $('.suite').click(function() {
         domUpdates.filterByRoomType(bookings.filterRooms('suite'))
+        $('.filteredRoom').toggle();
       });
 
     function searchCust(e) {
@@ -100,7 +104,6 @@ $( document ).ready(function() {
      } else {
       domUpdates.searchCustError();
     }
-    // $('.searchCustomersInput').val('');
     $('.newCustomers').html('');
   }
 
@@ -110,7 +113,6 @@ $( document ).ready(function() {
         const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
         const changeClick = combinedData.userData.users.map(user => {
           if(user.id === cust[0].id) {
-            console.log('id', cust)
             user.clicked = true;            
           }
           return user;
@@ -126,7 +128,6 @@ function displayCustOrders() {
   let customer = new Customer();
   const checkClick = combinedData.userData.users.find(user => {
     if(user.clicked) {
-  console.log(combinedData.userData.users)
       domUpdates.customerOrders(customer.roomServiceAndOrderBreakdown(user));
       console.log('1', user)
       domUpdates.totalOrdersForDate(customer.totalCostOfRoomServiceByDate('21/10/2019', user));
@@ -148,6 +149,10 @@ $('.submit__date__button').on('click', function() {
 
 $('.orderSearch').on('click', searchOrdersByDate);
 
+$('.customers').on('click', function() {
+  domUpdates.showCustomer($('.newCustName').html())
+})
+
 function searchOrdersByDate(e) {
   e.preventDefault();
   const order = new Order();
@@ -155,6 +160,6 @@ function searchOrdersByDate(e) {
   if(searchOrder.length !== 0) {
     domUpdates.searchOrders(searchOrder);
   } else {
-    domUpdates.searchCustError();
+    domUpdates.searchOrderError();
   }
 }

@@ -50,33 +50,44 @@ let domUpdates = {
       },
 
       searchCustError() {
-        $('.custSearchOrder').html('');
-        $('.custSearchOrder').prepend(`<p>No orders match this date.</p>`);
-      },
-
-      searchOrderError() {
         $('.customers').html('');
         $('.customers').prepend(`<p>No results. Please add a new guest</p>`);
       },
 
+      searchOrderError() {
+        $('.custSearchOrder').html('');
+        $('.todaysOrders').html('');
+        $('.custSearchOrder').prepend(`<p>No orders match this date.</p>`);
+      },
+
+      showCustomer(name) {
+        $('.showCustomer').html('');
+        $('.showCustomer').append(`Customer selected: ${name}`)
+      },
+
     customerOrders(customer) {
           customer.forEach(property => {
+            $('.todaysOrders').html('');
             $('.custOrder').append(` <p class="custOrderInfo">Date ordered: ${property.date}, Total cost: ${property.totalCost}</p> `);
           })
       },
 
       searchOrders(order) {
+        $('.custSearchOrder').html('');
+        $('.todaysOrders').html('');
           order.forEach(date => {
             $('.custSearchOrder').append(` Food ordered: ${date.food}`)
           }) 
       },
 
     totalOrdersForDate(cost) {
-      $('.custOrder').append(` <p class="custOrderInfo">Total for date: ${cost}</p> `);
+        $('.todaysOrders').html('');
+        $('.custOrder').append(` <p class="custOrderInfo">Total for date: ${cost}</p> `);
     },
 
     totalOrdersForAllTime(cost) {
-      $('.custOrder').append(` <p class="custOrderInfo">Total spent for all time: ${cost}</p> `);
+        $('.todaysOrders').html('');
+        $('.custOrder').append(` <p class="custOrderInfo">Total spent for all time: ${cost}</p> `);
     },
 
     showCustBookings(booking) {
