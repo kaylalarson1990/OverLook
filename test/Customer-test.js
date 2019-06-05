@@ -30,8 +30,8 @@ describe('Customer', function() {
     
   it('should return a new user when added', function () {
     customer.createNewCustomer();
-    expect(customer.createNewCustomer('Sergio Seplovich')).to.eql({id: 12, name: 'Sergio Seplovich', clicked: false});
-    expect(customer.data.userData.users.length).to.equal(12);
+    expect(customer.createNewCustomer('Sergio Seplovich')).to.eql({id: 102, name: 'Sergio Seplovich', clicked: false});
+    expect(customer.data.userData.users.length).to.equal(102);
   });
 
   it('should return breakdown of orders', function() {

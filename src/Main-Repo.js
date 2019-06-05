@@ -40,7 +40,8 @@ class MainRepository {
       });
       return total;
     }, 0);
-    return debt + charges;
+    const final = Number(debt + charges).toFixed(2);
+    return parseFloat(final);
   }
 
   showPercentageOfRoomsOccupiedToday() {

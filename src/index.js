@@ -12,85 +12,81 @@ import './images/keycard.svg'
 import './images/search.svg'
 
 const userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
-  .then(function(response){
+  .then(function(response) {
     return response.json()
   });
 const roomServiceData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices')
-  .then(function(response){
+  .then(function(response) {
     return response.json()
-});
+  });
 const bookingData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings')
-  .then(function(response){
+  .then(function(response) {
     return response.json()
   });
 const roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms')
-  .then(function(response){
+  .then(function(response) {
     return response.json()
   });
-const combinedData = {userData:[], roomServiceData:[], bookingData:[], roomData:[]};
+const combinedData = {userData: [], roomServiceData: [], bookingData: [], roomData: []};
 
 Promise.all([userData, roomServiceData, bookingData, roomData])
-    .then(function(values) {
-      combinedData.userData = values[0];
-      combinedData.roomServiceData = values[1];
-      combinedData.bookingData = values[2];
-      combinedData.roomData = values[3];
-      combinedData.userData.users.map(user => {
-        user.clicked = false;
-      })
+  .then(function(values) {
+    combinedData.userData = values[0];
+    combinedData.roomServiceData = values[1];
+    combinedData.bookingData = values[2];
+    combinedData.roomData = values[3];
+    combinedData.userData.users.map(user => {
+      user.clicked = false;
     })
-    .catch(error => console.log(`Error in promises ${error}`))
+  })
+  .catch(error => console.log(`Error in promises ${error}`))
 
 $( document ).ready(function() {
-    setTimeout(function () {
-      let mainRepo = new MainRepository(combinedData);
-      let customer = new Customer(combinedData);
-      let order = new Order(combinedData);
-      let bookings = new Bookings(combinedData);
-      mainRepo.showTodaysDate();
-      order.returnDailyTotalSpent('21/10/2019');
-      domUpdates.showRoomsBookedForDate(bookings.bookedRooms());
-      domUpdates.showCurrentDate(mainRepo.showTodaysDate());
-      domUpdates.roomsOccupiedPercentage(mainRepo.showPercentageOfRoomsOccupiedToday());
-      domUpdates.availableRooms(mainRepo.showAvailableRooms());
-      domUpdates.totalOwedForTodaysDate(mainRepo.calculateDebtsToday());
-      domUpdates.showAllOrders(order.returnAllRoomServices());
-      domUpdates.showMostPopularDate(bookings.mostPopularBookingDate());
-      domUpdates.showLeastPopularDate(bookings.leastPopularBookingDate());
+  setTimeout(function () {
+    let mainRepo = new MainRepository(combinedData);
+    let customer = new Customer(combinedData);
+    let order = new Order(combinedData);
+    let bookings = new Bookings(combinedData);
+    mainRepo.showTodaysDate();
+    order.returnDailyTotalSpent('21/10/2019');
+    domUpdates.showRoomsBookedForDate(bookings.bookedRooms());
+    domUpdates.showCurrentDate(mainRepo.showTodaysDate());
+    domUpdates.roomsOccupiedPercentage(mainRepo.showPercentageOfRoomsOccupiedToday());
+    domUpdates.availableRooms(mainRepo.showAvailableRooms());
+    domUpdates.totalOwedForTodaysDate(mainRepo.calculateDebtsToday());
+    domUpdates.showAllOrders(order.returnAllRoomServices());
+    domUpdates.showMostPopularDate(bookings.mostPopularBookingDate());
+    domUpdates.showLeastPopularDate(bookings.leastPopularBookingDate());
 
-      $('ul.tabs li').click(function() {
-        var tab_id = $(this).attr('data-tab');
-        $('ul.tabs li').removeClass('current');
-        $('.tab-content').removeClass('current');
-        $(this).addClass('current');
-        $("#" + tab_id).addClass('current');
-      });
+    $('ul.tabs li').click(function() {
+      var tab_id = $(this).attr('data-tab');
+      $('ul.tabs li').removeClass('current');
+      $('.tab-content').removeClass('current');
+      $(this).addClass('current');
+      $("#" + tab_id).addClass('current');
+    });
 
-      $('.addNewCustomer').click(function() {
-        domUpdates.addNewCustomer(customer.createNewCustomer($('.name').val()));
-        $('.name').val('');
-        $('.customers').html('');
-      });
+    $('.addNewCustomer').click(function() {
+      domUpdates.addNewCustomer(customer.createNewCustomer($('.name').val()));
+      $('.name').val('');
+      $('.customers').html('');
+    });
 
-      $('.resSuite').click(function() {
-        domUpdates.filterByRoomType(bookings.filterRooms('residential suite'))
-        $('.filteredRoom').toggle();
-      });
+    $('.resSuite').click(function() {
+      domUpdates.filterByRoomType(bookings.filterRooms('residential suite'))
+    });
 
-      $('.single').click(function() {
-        domUpdates.filterByRoomType(bookings.filterRooms('single room'))
-        $('.filteredRoom').toggle();
-      });
+    $('.single').click(function() {
+      domUpdates.filterByRoomType(bookings.filterRooms('single room'))
+    });
 
-      $('.juniorSuite').click(function() {
-        domUpdates.filterByRoomType(bookings.filterRooms('junior suite'))
-        $('.filteredRoom').toggle();
-      });
+    $('.juniorSuite').click(function() {
+      domUpdates.filterByRoomType(bookings.filterRooms('junior suite'))
+    });
 
-      $('.suite').click(function() {
-        domUpdates.filterByRoomType(bookings.filterRooms('suite'))
-        $('.filteredRoom').toggle();
-      });
+    $('.suite').click(function() {
+      domUpdates.filterByRoomType(bookings.filterRooms('suite'))
+    });
 
     function searchCust(e) {
       e.preventDefault();
@@ -101,7 +97,7 @@ $( document ).ready(function() {
         domUpdates.searchCustError();
       }
       $('.newCustomers').html('');
-  }
+    }
 
     $('.searchCustomers').on('click', searchCust);
 
@@ -116,8 +112,8 @@ $( document ).ready(function() {
       combinedData.userData.users = changeClick;
       displayCustOrders();
     });
-    }, 1000);
-  });
+  }, 1000);
+});
 
 function displayCustOrders() {
   let customer = new Customer();

@@ -36,7 +36,7 @@ describe('Order', function() {
   });
 
   it('should return total spent over all time', function() {
-    expect(order.returnAllTimeTotalSpent()).to.equal(129.06);
+    expect(order.returnAllTimeTotalSpent()).to.equal(1508.6);
   });
 
   it('should return total spent over all time as a number', function() {

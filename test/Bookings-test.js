@@ -20,7 +20,7 @@ describe('Bookings', function() {
   });
 
   it('should return the date with the most rooms booked', function() {
-    expect(bookings.mostPopularBookingDate()).to.equal('21/08/2019')
+    expect(bookings.mostPopularBookingDate()).to.equal('29/09/2019')
   });
 
   it('should return the date with the least rooms booked', function() {
@@ -28,10 +28,14 @@ describe('Bookings', function() {
   });
 
   it('should be able to filter rooms by type', function() {
-    expect(bookings.filterRooms([])).to.eql([]);
+    expect(bookings.filterRooms('suite')).to.be.an('array');
+  });
+
+  it('should find length of filter rooms by type', function() {
+    expect(bookings.filterRooms('suite').length).to.equal(51);
   });
 
   it('should be able to filter rooms by date and type', function() {
-    expect(bookings.filterRoomsByDate([])).to.eql([]);
+    expect(bookings.filterRoomsByDate('21/08/2019', 'suite')).to.be.an('array');
   })
 });
