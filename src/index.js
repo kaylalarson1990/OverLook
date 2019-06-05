@@ -44,7 +44,6 @@ Promise.all([userData, roomServiceData, bookingData, roomData])
 $( document ).ready(function() {
     setTimeout(function () {
       let mainRepo = new MainRepository(combinedData);
-      let customerRepo = new CustomerRepository(combinedData);
       let customer = new Customer(combinedData);
       let order = new Order(combinedData);
       let bookings = new Bookings(combinedData);
