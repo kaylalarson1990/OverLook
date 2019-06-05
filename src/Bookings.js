@@ -45,12 +45,16 @@ class Bookings {
 
   filterRooms(type) {
     let rooms = this.data.roomData.rooms.filter(room => room.roomType === type);
-    console.log(rooms)
     return rooms;
   }
       
   filterRoomsByDate(date, type) {
     return this.filterRooms(date).filter(room => room.roomType === type)
+  }
+
+  bookANewRoom(room) {
+    const bookARoom = this.data.bookingData.bookings.push(room);
+    return bookARoom;
   }
 }
 

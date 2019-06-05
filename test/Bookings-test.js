@@ -37,5 +37,14 @@ describe('Bookings', function() {
 
   it('should be able to filter rooms by date and type', function() {
     expect(bookings.filterRoomsByDate('21/08/2019', 'suite')).to.be.an('array');
+  });
+
+  it('should be able to book a new room', function() {
+    bookings.bookANewRoom({
+      userID: 78,
+      date: "20/06/2019",
+      roomNumber: 143
+      })
+    expect(bookings.data.bookingData.bookings.length).to.equal(201)
   })
 });

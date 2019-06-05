@@ -119,7 +119,7 @@ let domUpdates = {
           <td>${room.bedSize}</td>
           <td>${room.numBeds}</td>
           <td>${room.costPerNight}</td>
-          <td><button class="bookRoom">Book Room</button>
+          <td><button class="bookRoom" id="${room.number}">Book Room</button>
           </tr> `)
     })
   } 

@@ -28,7 +28,7 @@ describe('MainRepository', function() {
   });
 
   it('should find available rooms', function() {
-    expect(mainRepo.showAvailableRooms('31/05/2019')).to.equal(198);
+    expect(mainRepo.showAvailableRooms('31/05/2019')).to.equal(199);
   });
 
   it('should show total debts as a number', function() {

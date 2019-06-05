@@ -40,6 +40,11 @@ class Order {
   returnRoomServicesByDate(givenDate) {
     return this.data.roomServiceData.roomServices.filter(day => day.date === givenDate);
   }    
+
+  addANewOrder(order) {
+    const addOrder = this.data.roomServiceData.roomServices.push(order);
+    return addOrder;
+  }
 }
 
 export default Order;

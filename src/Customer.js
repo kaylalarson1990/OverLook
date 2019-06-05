@@ -19,21 +19,20 @@ class Customer {
   createNewCustomer(name) {
     let ids = this.data.userData.users.map(cust => cust.id);
     let newCust = { id: Math.max(...ids) + 1, name, clicked: false };
-    console.log(newCust)
     this.data.userData.users.push(newCust);
     return newCust;
   }
 
   roomServiceAndOrderBreakdown(customer) {
     let orders = this.data.roomServiceData.roomServices.filter(item => item.userID === customer.id);
-    console.log('cust1', customer)
-    console.log('cust2', orders)
     return orders;
   }
 
   totalCostOfRoomServiceByDate(date, customer) {
     let orders = this.data.roomServiceData.roomServices.filter(item => item.userID === customer.id);
     let specificDate = orders.filter(item => item.date === date);
+    console.log(customer)
+
     return specificDate.reduce((total, order) => {
       total += order.totalCost;
       return total;

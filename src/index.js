@@ -74,6 +74,9 @@ $( document ).ready(function() {
 
     $('.resSuite').click(function() {
       domUpdates.filterByRoomType(bookings.filterRooms('residential suite'))
+      $('.bookRoom').on('click', function() {
+        console.log(this.id)
+      })
     });
 
     $('.single').click(function() {
@@ -100,6 +103,8 @@ $( document ).ready(function() {
     }
 
     $('.searchCustomers').on('click', searchCust);
+
+   
 
     $('.customers').on('click', function() {
       const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
