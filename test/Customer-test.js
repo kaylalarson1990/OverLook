@@ -11,45 +11,43 @@ chai.spy.on(domUpdates, 'addNewCustomer', () => true);
 
 
 describe('Customer', function() {
-    let customer;
-    let testCust;
-    beforeEach(function () {
-        customer = new Customer(data);
-        testCust = customer.returnSearchedCustomers('Jannie VonRueden')
-    });
-  
-    it('should be a function', function() {
-      expect(Customer).to.be.a('function');
-    });
-  
-    it('should create a new instance', function() {
-      expect(customer).to.be.an.instanceOf(Customer);
-    });
-
-    it('should return a user when searched', function() {
-        expect(customer.searchCustomers('Autumn Toy')).to.be.an('object');
-      });
-    
-    it.skip('should return a new user when added', function () {
-      // customer.createNewCustomer();
-      expect(customer.createNewCustomer('Sergio Seplovich')).to.equal('Sergio Seplovich');
-      // expect(customer.data.customerData.users.length).to.equal(101);
-    });
-
-    it('should return breakdown of orders', function() {
-      expect(customer.roomServiceAndOrderBreakdown(testCust)).to.eql({ '01/01/2020': [ 18.63 ] });
-    });
-
-    it('should find total room service charges by date', function() {
-      expect(customer.totalCostOfRoomServiceByDate("01/01/2020", testCust)).to.equal(18.63);
-    });
-
-    it('should return total room service charges over all time', function() {
-      expect(customer.totalAmountOfRoomServiceAllTime(testCust)).to.equal(18.63);
-    });
-
-    it('should return a summary of all reservations', function() {
-      expect(customer.sumOfPastAndCurrentBookings(testCust)).to.eql({})
-    })
-  
+  let customer;
+  beforeEach(function () {
+    customer = new Customer(data);
   });
+  
+  it('should be a function', function() {
+    expect(Customer).to.be.a('function');
+  });
+  
+  it('should create a new instance', function() {
+    expect(customer).to.be.an.instanceOf(Customer);
+  });
+
+  it('should return a user when searched', function() {
+    expect(customer.searchCustomers('Autumn Toy')).to.be.an('object');
+  });
+    
+  it('should return a new user when added', function () {
+    customer.createNewCustomer();
+    expect(customer.createNewCustomer('Sergio Seplovich')).to.eql({id: 12, name: 'Sergio Seplovich', clicked: false});
+    expect(customer.data.userData.users.length).to.equal(12);
+  });
+
+  it('should return breakdown of orders', function() {
+    expect(customer.roomServiceAndOrderBreakdown('Jannie VonRueden')).to.eql([]);
+  });
+
+  it('should find total room service charges by date', function() {
+    expect(customer.totalCostOfRoomServiceByDate("01/01/2020", 'Jannie VonRueden')).to.equal(0);
+  });
+
+  it('should return total room service charges over all time', function() {
+    expect(customer.totalAmountOfRoomServiceAllTime('Jannie VonRueden')).to.equal(0);
+  });
+
+  it('should return a summary of all reservations', function() {
+    expect(customer.sumOfPastAndCurrentBookings('Jannie VonRueden')).to.eql([])
+  })
+  
+});

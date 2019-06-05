@@ -6,26 +6,32 @@ chai.use(spies);
 import data from '../src/data.js';
 
 describe('Bookings', function() {
-    let bookings;
-    beforeEach(function () {
-        bookings = new Bookings(data);
-    });
-  
-    it('should be a function', function() {
-      expect(Bookings).to.be.a('function');
-    });
-  
-    it('should create a new instance', function() {
-      expect(bookings).to.be.an.instanceOf(Bookings);
-    });
-
-    it('should return the date with the most rooms booked', function() {
-        expect(bookings.mostPopularBookingDate()).to.equal('21/08/2019')
-    });
-
-    it('should return the date with the least rooms booked', function() {
-        expect(bookings.leastPopularBookingDate()).to.equal('21/08/2019')
-    });
-    
-  
+  let bookings;
+  beforeEach(function () {
+    bookings = new Bookings(data);
   });
+  
+  it('should be a function', function() {
+    expect(Bookings).to.be.a('function');
+  });
+  
+  it('should create a new instance', function() {
+    expect(bookings).to.be.an.instanceOf(Bookings);
+  });
+
+  it('should return the date with the most rooms booked', function() {
+    expect(bookings.mostPopularBookingDate()).to.equal('21/08/2019')
+  });
+
+  it('should return the date with the least rooms booked', function() {
+    expect(bookings.leastPopularBookingDate()).to.equal('21/08/2019')
+  });
+
+  it('should be able to filter rooms by type', function() {
+    expect(bookings.filterRooms([])).to.eql([]);
+  });
+
+  it('should be able to filter rooms by date and type', function() {
+    expect(bookings.filterRoomsByDate([])).to.eql([]);
+  })
+});
