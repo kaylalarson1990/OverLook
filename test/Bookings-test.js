@@ -32,7 +32,8 @@ describe('Bookings', function() {
   });
 
   it('should find length of filter rooms by type', function() {
-    expect(bookings.filterRooms('suite').length).to.equal(51);
+    expect(bookings.filterRooms('21/10/2019')).to.be.an('array');
+    expect(bookings.filterRooms('21/10/2019').length).to.equal(0);
   });
 
   it('should be able to filter rooms by date and type', function() {

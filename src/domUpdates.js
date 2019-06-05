@@ -97,6 +97,14 @@ let domUpdates = {
     })
   },
 
+  displayNewBookedRoom(cust, roomNum, date) {
+    $('.filteredRoom').html('');
+    $('.popData1').html('');
+    $('.unPopData').html('');
+    $('.popData2').html('');
+    $('.filteredRoom').append(` New booking for ${cust.name} in room number ${roomNum} on ${date} `)
+  },
+
   filterByRoomType(suites) {
     $('.filteredRoom').html('');
     $('.popData1').html('');
@@ -119,10 +127,12 @@ let domUpdates = {
           <td>${room.bedSize}</td>
           <td>${room.numBeds}</td>
           <td>${room.costPerNight}</td>
-          <td><button class="bookRoom" id="${room.number}">Book Room</button>
+          <td><button class="bookRoom" id="${room.number}">Book Room</button></td>
           </tr> `)
     })
-  } 
+  },
+
+
 }
 
 export default domUpdates;

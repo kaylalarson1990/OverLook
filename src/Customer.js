@@ -31,8 +31,6 @@ class Customer {
   totalCostOfRoomServiceByDate(date, customer) {
     let orders = this.data.roomServiceData.roomServices.filter(item => item.userID === customer.id);
     let specificDate = orders.filter(item => item.date === date);
-    console.log(customer)
-
     return specificDate.reduce((total, order) => {
       total += order.totalCost;
       return total;

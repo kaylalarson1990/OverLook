@@ -41,6 +41,8 @@ Promise.all([userData, roomServiceData, bookingData, roomData])
   })
   .catch(error => console.log(`Error in promises ${error}`))
 
+  let currCust;
+
 $( document ).ready(function() {
   setTimeout(function () {
     let mainRepo = new MainRepository(combinedData);
@@ -57,6 +59,7 @@ $( document ).ready(function() {
     domUpdates.showAllOrders(order.returnAllRoomServices());
     domUpdates.showMostPopularDate(bookings.mostPopularBookingDate());
     domUpdates.showLeastPopularDate(bookings.leastPopularBookingDate());
+    
 
     $('ul.tabs li').click(function() {
       var tab_id = $(this).attr('data-tab');
@@ -72,23 +75,11 @@ $( document ).ready(function() {
       $('.customers').html('');
     });
 
-    $('.resSuite').click(function() {
-      domUpdates.filterByRoomType(bookings.filterRooms('residential suite'))
+    $('.searchRoomsBtn').on('click', function() {
+      domUpdates.filterByRoomType(bookings.filterRoomsByDate($('.searchRoomsInput').val(), $('.searchRoomTypeInput').val()))
       $('.bookRoom').on('click', function() {
-        console.log(this.id)
+        domUpdates.displayNewBookedRoom(currCust[0], this.id, $('.searchRoomsInput').val())
       })
-    });
-
-    $('.single').click(function() {
-      domUpdates.filterByRoomType(bookings.filterRooms('single room'))
-    });
-
-    $('.juniorSuite').click(function() {
-      domUpdates.filterByRoomType(bookings.filterRooms('junior suite'))
-    });
-
-    $('.suite').click(function() {
-      domUpdates.filterByRoomType(bookings.filterRooms('suite'))
     });
 
     function searchCust(e) {
@@ -107,9 +98,9 @@ $( document ).ready(function() {
    
 
     $('.customers').on('click', function() {
-      const cust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
+      currCust = customer.returnSearchedCustomers($('.searchCustomersInput').val())
       const changeClick = combinedData.userData.users.map(user => {
-        if (user.id === cust[0].id) {
+        if (user.id === currCust[0].id) {
           user.clicked = true;            
         }
         return user;
@@ -141,6 +132,7 @@ $('.customers').on('click', function() {
 
 function searchOrdersByDate(e) {
   e.preventDefault();
+  const customer = new Customer();
   const order = new Order();
   const searchOrder = order.returnRoomServicesByDate($('.searchOrderInput').val());
   if (searchOrder.length !== 0) {

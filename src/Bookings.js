@@ -43,17 +43,26 @@ class Bookings {
     }, []);
   }
 
-  filterRooms(type) {
-    let rooms = this.data.roomData.rooms.filter(room => room.roomType === type);
-    return rooms;
+  filterRooms(date) {
+    const rooms = this.data.bookingData.bookings.filter(room => {
+      if(room.date !== date) {
+        return room.roomNumber;
+      }
+    });
+    const findRoom = rooms.map(room => room.roomNumber);
+    return findRoom;
   }
       
   filterRoomsByDate(date, type) {
-    return this.filterRooms(date).filter(room => room.roomType === type)
+    const filteredRooms = this.filterRooms(date);
+    const rooms = this.data.roomData.rooms.filter(room => !filteredRooms.includes(room.number));
+    const final = rooms.filter(room => room.roomType === type);
+    return final;
   }
 
   bookANewRoom(room) {
     const bookARoom = this.data.bookingData.bookings.push(room);
+    console.log('room:', room)
     return bookARoom;
   }
 }

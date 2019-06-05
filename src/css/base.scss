@@ -105,7 +105,10 @@ ul.tabs li.current{
 .addNewCustomer, 
 .orderSearch,
 .addNewFood,
-.searchOrderInput {
+.searchOrderInput,
+.searchRoomsBtn,
+.searchRoomsInput,
+.searchRoomTypeInput {
   font-size: 16px;
   border-radius: 3px;
   margin: 10px;
@@ -117,7 +120,8 @@ ul.tabs li.current{
 .searchCustomers, 
 .addNewCustomer, 
 .orderSearch,
-.addNewFood {
+.addNewFood,
+.searchRoomsBtn {
   background: $backgroundBtn;
   color: $background;
   width: 100%;
@@ -161,15 +165,29 @@ select {
   margin: 50px 10px;
 }
 
+.popData1,
+.unPopData,
+.popData2,
+p,
+.filteredRoom {
+  text-align:center;
+}
+
 p,
 .customers,
 .newCustomers,
 .popData1,
 .todaysOrders,
-.custSearchOrder {
+.custSearchOrder,
+.filteredRoom
+ {
   margin: 10px;
   font-size: 24px;
   font-weight: 350;
+}
+
+.filteredRoom {
+  color: $secondary-color;
 }
 
 .newCustName {
@@ -227,7 +245,10 @@ table, th, td {
   .addNewFood,
   .name,
   .searchCustomersInput,
-  .searchOrderInput {
+  .searchOrderInput,
+  .searchRoomsBtn,
+  .searchRoomsInput,
+  .searchRoomTypeInput {
     width: 50%;
     font-size: 12px;
   }
@@ -245,7 +266,8 @@ p,
 .newCustomers,
 .popData1,
 .todaysOrders,
-.custSearchOrder {
+.custSearchOrder,
+.filteredRoom {
   font-size: 18px;
 }
 
@@ -258,7 +280,9 @@ p,
   .addNewFood, 
   .name, 
   .searchCustomersInput, 
-  .searchOrderInput {
+  .searchOrderInput,
+  .searchRoomsInput,
+  .searchRoomTypeInput {
     width: 60%;
   }
 
