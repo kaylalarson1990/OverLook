@@ -23,10 +23,6 @@ let domUpdates = {
     $('.totalOwed').append(`Total debts owed/earned: ${price} `);
   },
 
-  addNewCustomer() {
-    $('.newCustomers').text($('.name').val());
-  }, 
-
   showMostPopularDate(date) {
     $('.popData1').prepend(`Most popular booking date: ${date}`);
   },
@@ -46,6 +42,11 @@ let domUpdates = {
       $('.customers').prepend(`<p>Name: <span class="newCustName">${cust.name}</span></p>`);
     });
   },
+
+  addNewCustomer() {
+    $('.newCustomers').html('');
+    $('.newCustomers').text($('.name').val());
+  }, 
 
   searchCustError() {
     $('.customers').html('');

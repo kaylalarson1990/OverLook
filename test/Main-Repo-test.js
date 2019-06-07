@@ -36,7 +36,7 @@ describe('MainRepository', function() {
   });
 
   it('should calculate total debts for today\'s date', function() {
-    expect(mainRepo.calculateDebtsToday('21/10/2019')).to.equal(643.99);
+    expect(mainRepo.calculateDebtsToday('21/10/2019')).to.equal(949.22);
   });
 
   it('should show percentage of rooms available as a number', function() {
@@ -44,7 +44,7 @@ describe('MainRepository', function() {
   });
 
   it('should calculate percentage of rooms available for today\'s date', function() {
-    expect(mainRepo.showPercentageOfRoomsOccupiedToday('21/10/2019')).to.equal(1);
+    expect(mainRepo.showPercentageOfRoomsOccupiedToday("07/06/2019")).to.equal(1);
   });
   
 });

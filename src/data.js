@@ -2016,32 +2016,32 @@ let data =
     bookings: [
       {
         userID: 78,
-        date: "21/08/2019",
+        date: "07/06/2019",
         roomNumber: 143
         },
         {
         userID: 43,
-        date: "05/10/2019",
+        date: "08/06/2019",
         roomNumber: 108
         },
         {
         userID: 5,
-        date: "31/08/2019",
+        date: "09/06/2019",
         roomNumber: 8
         },
         {
         userID: 14,
-        date: "17/07/2019",
+        date: "10/06/2019",
         roomNumber: 192
         },
         {
         userID: 83,
-        date: "15/01/2020",
+        date: "08/06/2019",
         roomNumber: 118
         },
         {
         userID: 61,
-        date: "07/02/2020",
+        date: "07/06/2019",
         roomNumber: 158
         },
         {
@@ -3022,7 +3022,7 @@ let data =
       roomServices: [
         {
           userID: 34,
-          date: "21/10/2019",
+          date: "07/06/2019",
           food: "Generic Plastic Sandwich",
           totalCost: 9.48
           },

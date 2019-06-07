@@ -24,7 +24,7 @@ describe('Bookings', function() {
   });
 
   it('should return the date with the least rooms booked', function() {
-    expect(bookings.leastPopularBookingDate()).to.equal('21/08/2019')
+    expect(bookings.leastPopularBookingDate()).to.equal('07/06/2019')
   });
 
   it('should be able to filter rooms by type', function() {
@@ -33,7 +33,7 @@ describe('Bookings', function() {
 
   it('should find length of filter rooms by type', function() {
     expect(bookings.filterRooms('21/10/2019')).to.be.an('array');
-    expect(bookings.filterRooms('21/10/2019').length).to.equal(0);
+    expect(bookings.filterRooms('21/10/2019').length).to.equal(198);
   });
 
   it('should be able to filter rooms by date and type', function() {

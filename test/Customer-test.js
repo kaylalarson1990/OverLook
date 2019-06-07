@@ -30,7 +30,7 @@ describe('Customer', function() {
   });
 
   it('should return a user when searched', function() {
-    expect(customer.searchCustomers('Autumn Toy')).to.be.an('object');
+    expect(customer.returnSearchedCustomers('Autumn Toy')).to.eql([ { id: 1, name: 'Autumn Toy' } ]);
   });
     
   it('should return a new user when added', function () {
@@ -47,7 +47,7 @@ describe('Customer', function() {
   });
 
   it('should caluculate total room service charges by date', function() {
-    expect(customer.totalCostOfRoomServiceByDate("21/10/2019", person)).to.equal(17.05);
+    expect(customer.totalCostOfRoomServiceByDate("21/10/2019", person)).to.equal(7.57);
 
   })
 
@@ -57,6 +57,8 @@ describe('Customer', function() {
 
   it('should return a summary of all reservations', function() {
     expect(customer.sumOfPastAndCurrentBookings('Jannie VonRueden')).to.eql([])
-  })
+  });
+
+
   
 });

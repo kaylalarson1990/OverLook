@@ -7,10 +7,6 @@ class Customer {
     this.data = confirmedData || data;
     this.customers = [];
   }
-
-  searchCustomers(name) {
-    return this.data.userData.users.find(cust => cust.name === name);
-  }
     
   returnSearchedCustomers(val) {
     return this.data.userData.users.filter(cust => cust.name.toLowerCase().includes(val.toLowerCase()));

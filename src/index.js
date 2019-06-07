@@ -78,7 +78,7 @@ $( document ).ready(function() {
     $('.searchRoomsBtn').on('click', function() {
       domUpdates.filterByRoomType(bookings.filterRoomsByDate($('.searchRoomsInput').val(), $('.searchRoomTypeInput').val()))
       $('.bookRoom').on('click', function() {
-        domUpdates.displayNewBookedRoom(currCust[0], this.id, $('.searchRoomsInput').val())
+        domUpdates.displayNewBookedRoom(currCust.pop(), this.id, $('.searchRoomsInput').val())
       })
     });
 
@@ -95,6 +95,17 @@ $( document ).ready(function() {
 
     $('.searchCustomers').on('click', searchCust);
 
+    $('.newCustomers').on('click', function() {
+      currCust = customer.returnSearchedCustomers($('.name').val())
+      const changeClick = combinedData.userData.users.map(user => {
+        if(user.id === currCust[0].id) {
+          user.clicked = true;          
+        }
+        return user;
+      })
+      combinedData.userData.users = changeClick;
+      displayCustOrders();
+    })
    
 
     $('.customers').on('click', function() {
@@ -128,6 +139,10 @@ $('.orderSearch').on('click', searchOrdersByDate);
 
 $('.customers').on('click', function() {
   domUpdates.showCustomer($('.newCustName').html())
+})
+
+$('.newCustomers').on('click', function() {
+  domUpdates.showCustomer($('.newCustomers').html())
 })
 
 function searchOrdersByDate(e) {
