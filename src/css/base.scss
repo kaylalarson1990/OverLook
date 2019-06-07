@@ -190,15 +190,19 @@ p,
   color: $secondary-color;
 }
 
-.newCustName,
 .newCustomers {
+  color: #56c6e2;
+  font-weight: 450;
+}
+
+.newCustName {
   color: #56c6e2;
   cursor: pointer;
   font-weight: 450;
 }
 
-.newCustName:hover,
-.newCustomers:hover {
+.newCustName:hover
+ {
   background-color: $primary-background;
 }
 

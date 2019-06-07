@@ -141,8 +141,8 @@ $('.customers').on('click', function() {
   domUpdates.showCustomer($('.newCustName').html())
 })
 
-$('.newCustomers').on('click', function() {
-  domUpdates.showCustomer($('.newCustomers').html())
+$('.addNewCustomer').on('click', function() {
+  domUpdates.showCustomer($('.name').val())
 })
 
 function searchOrdersByDate(e) {
