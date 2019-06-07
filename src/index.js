@@ -95,7 +95,7 @@ $( document ).ready(function() {
 
     $('.searchCustomers').on('click', searchCust);
 
-    $('.newCustomers').on('click', function() {
+    $('.addNewCustomer').on('click', function() {
       currCust = customer.returnSearchedCustomers($('.name').val())
       const changeClick = combinedData.userData.users.map(user => {
         if(user.id === currCust[0].id) {
