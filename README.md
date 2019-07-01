@@ -44,7 +44,18 @@ This might sound weird, but you need to `import` your SCSS files in the JavaScri
 
 ### Images
 
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
+# Homescreen:
+<img width="1494" alt="Screen Shot 2019-07-01 at 10 33 14 AM" src="https://user-images.githubusercontent.com/37026730/60452486-d5e9cd00-9beb-11e9-82cb-98020410bc8d.png">
+
+# Search customer:
+<img width="1633" alt="Screen Shot 2019-07-01 at 10 33 34 AM" src="https://user-images.githubusercontent.com/37026730/60452510-e39f5280-9beb-11e9-8003-8835fd84e824.png">
+
+# Book a room:
+<img width="1656" alt="Screen Shot 2019-07-01 at 10 33 43 AM" src="https://user-images.githubusercontent.com/37026730/60452513-e601ac80-9beb-11e9-920d-3b176b72b5d7.png">
+
+# Search orders:
+<img width="1660" alt="Screen Shot 2019-07-01 at 10 33 51 AM" src="https://user-images.githubusercontent.com/37026730/60452518-e8640680-9beb-11e9-977f-9e5cfe0b2fd2.png">
+
 
 ## How to View Your Code in Action
 
